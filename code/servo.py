@@ -24,17 +24,37 @@ def flip():
     time.sleep(1)"""
     #Roller turns to curl page
     pwm.ChangeDutyCycle(11)
-    time.sleep(0.41)
+    time.sleep(0.45)
     pwm.ChangeDutyCycle(0)
     time.sleep(3)
 
-    #Flipper turns to flip page and flips back
-    pwm2.ChangeDutyCycle(14)
+    #Roller turns to curl page
+    pwm2.ChangeDutyCycle(11)
+    time.sleep(1.1)
+    pwm2.ChangeDutyCycle(0)
+    time.sleep(3)
+
+    """#Flipper turns to flip page and flips back
+    pwm2.ChangeDutyCycle(4)
+    time.sleep(0.2)
+    pwm2.ChangeDutyCycle(8)
+    time.sleep(0.2)
+    pwm2.ChangeDutyCycle(12)
+    time.sleep(0.2)
+    pwm2.ChangeDutyCycle(13)
     time.sleep(3)
     pwm2.ChangeDutyCycle(2.4)
-    time.sleep(5)
+    time.sleep(5)"""
+
+    """#Rollers turning back
+    pwm.ChangeDutyCycle(1)
+    time.sleep(0.2)
+    pwm.ChangeDutyCycle(0)
+    time.sleep(3)"""
 
 
+                      
+                    
 while True:
     #GPIO.setmode(GPIO.BOARD)
     #GPIO.setup(40,GPIO.IN)
