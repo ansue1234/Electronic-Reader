@@ -23,17 +23,17 @@ def flip():
     pwm.ChangeDutyCycle(11.5)
     time.sleep(1)"""
     #Roller turns to curl page
-    pwm.ChangeDutyCycle(11)
-    time.sleep(0.45)
+    pwm.ChangeDutyCycle(7.5)
+    time.sleep(0.9)
     pwm.ChangeDutyCycle(0)
     time.sleep(3)
     print("Turned")
 
-    #Roller turns to curl page
-    pwm2.ChangeDutyCycle(11)
-    time.sleep(1.1)
+    #Flipper to swipe over the pages
+    pwm2.ChangeDutyCycle(8)
+    time.sleep(1.5)
     pwm2.ChangeDutyCycle(0)
-    time.sleep(3)
+    time.sleep(1)
 
     """#Flipper turns to flip page and flips back
     pwm2.ChangeDutyCycle(4)
