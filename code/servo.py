@@ -27,6 +27,7 @@ def flip():
     time.sleep(0.45)
     pwm.ChangeDutyCycle(0)
     time.sleep(3)
+    print("Turned")
 
     #Roller turns to curl page
     pwm2.ChangeDutyCycle(11)

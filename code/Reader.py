@@ -27,7 +27,7 @@ GPIO.setup(11,GPIO.OUT)
 GPIO.setup(40,GPIO.IN)
 pwm = GPIO.PWM(12,50)
 pwm2 = GPIO.PWM(11,50)
-f = 0
+t = 0
 #Start PWM
 pwm.start(0)
 pwm2.start(0)
@@ -68,10 +68,10 @@ def flip():
 #	-s180:		set reading to 180 Words per minute
 #	-k20:		Emphasis on Capital letters
 def sound(spk):
-        cmd_beg=" espeak -ven+m7 -s180 -k20 --stdout '"
-        cmd_end="' | aplay"
-        print cmd_beg+spk+cmd_end
-        call ([cmd_beg+spk+cmd_end], shell=True)
+    cmd_beg=" espeak -ven+m7 -s180 -k20 --stdout '"
+    cmd_end="' | aplay"
+    print cmd_beg+spk+cmd_end
+    call ([cmd_beg+spk+cmd_end], shell=True)
 
 #Setting up the BrickPi for the page rotating arm
 """roller =PORT_A
@@ -87,66 +87,32 @@ t1=.3
 t2=.9"""
 
 while True:
-	#Take an image from the RaspberryPi camera with sharpness 100(increases the readability of the text for OCR)
-	call ("raspistill -o j2.jpg -t 1 -sh 100", shell=True)
-	print "Image taken"
+    #Take an image from the RaspberryPi camera with sharpness 100(increases the readability of the text for OCR)
+    call ("raspistill -o j2.jpg -t 1 -sh 100", shell=True)
+    print "Image taken"
 	
-	#Start the Tesseract OCR and save the text to out1.txt
-	call ("tesseract j2.jpg out1", shell=True)
-	print "OCR complete"
-	
-	#Open the text file and split the paragraph to Sentences
-	fname="out1.txt"
-	f=open(fname)
-	content=f.read()
-	print content
-	sentences = splitParagraphIntoSentences(content)
+    #Start the Tesseract OCR and save the text to out1.txt
+    call ("tesseract j2.jpg out1", shell=True)
+    print "OCR complete"
+    
+    #Open the text file and split the paragraph to Sentences
+    fname="out1.txt"
+    f=open(fname)
+    content=f.read()
+    print content
+    sentences = splitParagraphIntoSentences(content)
 
-	#Speak aloud each sentence in the paragraph one by one
-	for s in sentences:
-		print s.strip()
-		call ("./speech.sh "+s.strip(), shell=True)#sound(s.strip())
-	
+    #Speak aloud each sentence in the paragraph one by one
+    for s in sentences:
+        print s.strip()
+        call ("./speech.sh "+s.strip(), shell=True)
+        sound(s.strip())
+    print ("Working")	
 
-#Move the motor arm to turn the page
-        #GPIO.setmode(GPIO.BOARD)
-        #GPIO.setup(40,GPIO.IN)
-        #if GPIO.input(40)== True:
-        flip()
-        f= f+1
-        print("continue ", f)
-	"""#Move the roller to bring up the page
-	BrickPi.MotorSpeed[roller] = -speed_roller
-	ot = time.time()
-	while(time.time() - ot < t1):    
-		BrickPiUpdateValues()
-		init_pos=BrickPi.Encoder[arm]
-		time.sleep(.1)              
-	
-	time.sleep(2)   
-	BrickPi.MotorSpeed[roller] = -55
-	BrickPi.MotorSpeed[arm] = speed_arm  
-
-	#Rotate the arm to flip the page and stop at the initial position
-	while True:			
-		BrickPiUpdateValues()     
-		if(BrickPi.Encoder[arm]-init_pos>710):
-			BrickPi.MotorSpeed[arm] = -85
-			BrickPiUpdateValues()
-			time.sleep(.1) 
-			BrickPi.MotorSpeed[arm] = 0
-			BrickPiUpdateValues()
-			time.sleep(.01) 
-			break
-		time.sleep(.01)              # sleep for 100 ms
-	
-	#Move the roller to bring pages down
-	time.sleep(2)   
-	BrickPiUpdateValues()
-	BrickPi.MotorSpeed[roller] = 50
-	BrickPi.MotorSpeed[arm] = 0  
-	ot = time.time()
-	while(time.time() - ot < 3):   
-		BrickPiUpdateValues()       
-		time.sleep(.1)            
-	time.sleep(3)"""	   
+    #Move the motor arm to turn the page
+    #GPIO.setmode(GPIO.BOARD)
+    #GPIO.setup(40,GPIO.IN)
+    #if GPIO.input(40)== True:
+    flip()
+    t= t+1
+    print("continue ", t)
