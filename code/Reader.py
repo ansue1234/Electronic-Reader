@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#/usr/bin/env python
 ###################################################################################
 #bookreader.py
 #Takes a picture of a page of printed text, performs Optical Character Recognition (ORC) 
@@ -45,13 +45,13 @@ def flip():
     time.sleep(1)"""
     #Roller turns to curl page
     pwm.ChangeDutyCycle(11)
-    time.sleep(0.45)
+    time.sleep(0.22)
     pwm.ChangeDutyCycle(0)
     time.sleep(3)
 
     #flipper flips
-    pwm2.ChangeDutyCycle(11)
-    time.sleep(1.1)
+    pwm2.ChangeDutyCycle(7.8)
+    time.sleep(4)
     pwm2.ChangeDutyCycle(0)
     time.sleep(3)
 
